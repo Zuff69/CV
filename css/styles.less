@@ -1,0 +1,359 @@
+@couleur: #313544;
+@couleurBandeau: #313544;
+@couleurDeNiveau: @couleur;
+@couleurEntete : #fff;
+
+@DossierImage: ~"../img/png_blanc/";
+@GrosseurIcone : 16px;
+
+/* fonctions */
+@radiusParDefaut : 5px;
+@paddingParDefaut : 0;
+@largeurParDefaut : 1100px;
+@grandeLargeur : @largeurParDefaut - 50px;
+@largeurAside : 220px;
+@largeurLi : @largeurAside - 20px;
+@largeurDroite : @largeurParDefaut - @largeurAside - 65px;
+
+.margin_nulle{
+	margin : 0;
+}
+
+.padding_nulle{
+	padding : 0;
+}
+
+.coinArrondi(@radius:@radiusParDefaut){
+    -webkit-border-radius:@radius;
+    -moz-border-radius:@radius;
+    border-radius:@radius;
+}
+
+.padding_bottom(@padding:@paddingParDefaut){
+    padding-bottom : @padding;
+}
+
+.largeur(@largeur:@largeurParDefaut){
+    width : @largeur;
+}
+
+.afficheImage(@NomDeLImage)
+{
+	@LienDeLImage: ~'@{DossierImage}@{NomDeLImage}';
+	content:url(~'@{LienDeLImage}');
+}
+
+.afficheIcone(@NomDeLIcone)
+{
+	@LienDeLImage: ~'@{DossierImage}@{NomDeLIcone}';
+
+	display: inline-block;
+	content: ' ';
+	height: @GrosseurIcone;
+	width: @GrosseurIcone;
+	margin-right: 5px;
+	margin-left: 2px;
+
+	background-color: @couleurEntete;
+	mask-image: url(~'@{LienDeLImage}');
+	-webkit-mask-image: url(~'@{LienDeLImage}');
+	mask-size: @GrosseurIcone @GrosseurIcone;
+}
+
+.float_droit{
+	float:right;
+}
+
+.float_gauche{
+	float:left;
+}
+
+/* balises classique */
+html
+{
+	vertical-align:top;
+}
+
+body
+{
+	font-family: FullerSansDT-Regular,sans-serif !important;
+	.largeur();
+	display: flex;  
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+h1
+{
+	padding : 10px 0;
+	.margin_nulle;
+}
+
+h3,h4
+{
+	padding : 10px 0 0 0;
+	.margin_nulle;
+	color :darken(@couleur, 10%);
+}
+
+h2,h5
+{
+	padding : 0;
+	.margin_nulle;
+	color :darken(@couleur, 10%);
+}
+
+h2
+{
+	background-color:@couleur;
+	color:#fff;
+}
+
+li{
+	margin-bottom: 2px;
+}
+
+a{
+color: @couleur;
+}
+
+/* section */
+section, header, footer
+{
+	border:3px solid @couleur;
+	.coinArrondi();
+	margin:0 0 10px 0;
+	div
+	{
+		padding:0 10px;	
+	}
+
+	header
+	{
+		border:0;
+		div, span{
+			font-size:0.8em;
+		}
+	}
+}
+
+img
+{
+	.float_gauche;
+	margin-right:20px;
+}
+
+aside{
+	order: 1;
+	flex: flex-shrink;
+	.largeur(@largeurAside);
+	vertical-align: top;
+	section{
+		.padding_bottom(10px);
+	}
+}
+
+main{
+	order: 2;
+	flex-basis: auto;
+	padding-left: 15px;
+}
+
+#affichageGauche{
+	display: inline-block;
+	.largeur(@largeurDroite);
+	margin-left: 10px;
+}
+
+#presentation
+{
+	.largeur(@grandeLargeur);
+	height:140px;
+	order: 1;
+	background-color: @couleurBandeau;
+	//background-image: url('../img/fond.jpg');
+	color: @couleurEntete;
+	position: relative;
+	h1{
+		padding: 5px 0 0;
+		font-size:30px;
+	}
+
+	h2
+	{
+		background:none;
+		position: absolute;
+		right: 50px;
+		top:70px;
+		font-size:35px;
+	}
+
+}
+
+#competences
+{
+	.largeur(@largeurAside);
+	li
+	{
+		display:block;
+		.largeur(@largeurLi);
+	}
+	h2:before
+	{
+		.afficheIcone('competences.png');
+		//.afficheIcone('competences.svg')	
+	}
+}
+
+
+
+#personnalite
+{
+	.largeur(@largeurAside);
+	div, p
+	{
+		padding: 5px 10px 0 10px;
+		margin: 0;	
+	}
+
+	h2:before
+	{
+		.afficheIcone('personnalite.png');
+		//.afficheIcone('personnalite.svg')
+	}
+}
+
+#Sociaux{
+	.largeur(@largeurAside);
+	li
+	{
+		display:block;
+		.largeur(@largeurLi);
+	}
+
+	h2{
+		font-size:23px;
+	}
+
+	h2:before
+	{
+		//.afficheIcone('people.svg');
+		.afficheIcone('sociaux.png');
+	}
+
+	padding-bottom: 3px;
+}
+
+#experience
+{
+	.largeur(@largeurDroite);
+	h2:before
+	{
+		.afficheIcone('experience.png');
+		//.afficheIcone('experience.svg')		
+	}	
+	padding-bottom: 8px;
+}
+
+#formation
+{
+	.largeur(@largeurDroite);
+	.padding_bottom(5px);
+	display: inline-block;
+	h2:before
+	{
+		.afficheIcone('formation.png');
+		//.afficheIcone('formation.svg')	
+		
+	}
+}
+
+#interet
+{
+	.largeur(@largeurDroite);
+	.padding_bottom(5px);
+
+	h2:before
+	{
+		.afficheIcone("interet.png");
+	}
+	
+	h2{
+		font-size:23px;
+	}
+}
+
+h5
+{
+	display:inline-block;
+}
+
+ul 
+{
+    list-style: none;
+    .padding_nulle;
+    .margin_nulle;
+}
+
+#experience li:before, #formation li:before, #interet li:before    
+{
+    content: "-"; 
+    padding-right: 8px;
+    color: @couleur; 
+}
+
+#container
+{
+	display: flex;
+	width:100%;
+	.padding_nulle;
+	div:first-child
+	{
+		width:40%;
+	}
+}
+
+.invisible
+{
+	visibility:hidden;
+}
+
+#encours
+{
+font-weight: bold;
+}
+
+/* Niveau de compétences et autres */
+.Niv5:after
+{
+    content: "● ● ● ● ●"; 
+	 color:@couleurDeNiveau;  
+	 .float_droit;
+}
+
+.Niv4:after
+{
+    content: "● ● ● ● ○"; 
+	color:@couleurDeNiveau; 
+	.float_droit;
+}
+
+.Niv3:after
+{
+   content: "● ● ● ○ ○"; 
+	color:@couleurDeNiveau; 
+	.float_droit;
+}
+
+.Niv2:after
+{
+   content: "● ● ○ ○ ○"; 
+	color:@couleurDeNiveau; 
+	.float_droit;
+}
+.Niv1:after
+{
+   content: "● ○ ○ ○ ○"; 
+	color: @couleurDeNiveau; 
+	.float_droit;
+}
