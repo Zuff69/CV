@@ -4,16 +4,12 @@
 @couleurEntete : #fff;
 
 @DossierImage: ~"../img/png_blanc/";
-@GrosseurIcone : 16px;
+@GrosseurIcone : 0.9em;
 
 /* fonctions */
 @radiusParDefaut : 5px;
 @paddingParDefaut : 0;
 @largeurParDefaut : 1100px;
-@grandeLargeur : @largeurParDefaut - 50px;
-@largeurAside : 220px;
-@largeurLi : @largeurAside - 20px;
-@largeurDroite : @largeurParDefaut - @largeurAside - 65px;
 
 .margin_nulle{
 	margin : 0;
@@ -34,7 +30,7 @@
 }
 
 .largeur(@largeur:@largeurParDefaut){
-    width : @largeur;
+    max-width: @largeur;
 }
 
 .afficheImage(@NomDeLImage)
@@ -76,22 +72,26 @@ html
 
 body
 {
-	font-family: FullerSansDT-Regular,sans-serif !important;
+	font-family: sans-serif;
+	font-size: 12px;
+	display: grid;
+	grid-template-columns: 15em 1fr;
+	grid-template-rows: 12.5em 1fr;
+	grid-template-areas: "h h"
+								"a m";
 	.largeur();
-	display: flex;  
-	flex-wrap: wrap;
-	justify-content: flex-start;
 }
+
 
 h1
 {
-	padding : 10px 0;
+	padding : 1em 0;
 	.margin_nulle;
 }
 
 h3,h4
 {
-	padding : 10px 0 0 0;
+	padding : 0;
 	.margin_nulle;
 	color :darken(@couleur, 10%);
 }
@@ -110,7 +110,7 @@ h2
 }
 
 li{
-	margin-bottom: 2px;
+	margin-bottom: 0.2em;
 }
 
 a{
@@ -122,10 +122,10 @@ section, header, footer
 {
 	border:3px solid @couleur;
 	.coinArrondi();
-	margin:0 0 10px 0;
+	margin:0 0 0.9em 0;
 	div
 	{
-		padding:0 10px;	
+		padding:0 0.9em;	
 	}
 
 	header
@@ -140,63 +140,60 @@ section, header, footer
 img
 {
 	.float_gauche;
-	margin-right:20px;
+	margin-right: 1em;
+}
+
+header {
+	grid-area: h; 
 }
 
 aside{
-	order: 1;
-	flex: flex-shrink;
-	.largeur(@largeurAside);
+	grid-area: a; 
 	vertical-align: top;
 	section{
-		.padding_bottom(10px);
+		.padding_bottom(0.9em);
 	}
 }
 
 main{
-	order: 2;
-	flex-basis: auto;
-	padding-left: 15px;
+	grid-area: m;
+	padding-left: 1em;
 }
 
 #affichageGauche{
 	display: inline-block;
-	.largeur(@largeurDroite);
-	margin-left: 10px;
+	margin-left: 0.9em;
 }
 
 #presentation
 {
-	.largeur(@grandeLargeur);
-	height:140px;
+	height:11.5em;
 	order: 1;
 	background-color: @couleurBandeau;
 	//background-image: url('../img/fond.jpg');
 	color: @couleurEntete;
 	position: relative;
 	h1{
-		padding: 5px 0 0;
-		font-size:30px;
+		padding: 0.1em 0 0;
+		font-size:2.5em;
 	}
 
 	h2
 	{
 		background:none;
 		position: absolute;
-		right: 50px;
-		top:70px;
-		font-size:35px;
+		right: 0.75em;
+		bottom: 0em;
+		font-size:2.5em;
 	}
 
 }
 
 #competences
 {
-	.largeur(@largeurAside);
 	li
 	{
 		display:block;
-		.largeur(@largeurLi);
 	}
 	h2:before
 	{
@@ -209,10 +206,9 @@ main{
 
 #personnalite
 {
-	.largeur(@largeurAside);
 	div, p
 	{
-		padding: 5px 10px 0 10px;
+		padding: 0em 0.9em 0.3em 0.9em;
 		margin: 0;	
 	}
 
@@ -223,16 +219,10 @@ main{
 	}
 }
 
-#Sociaux{
-	.largeur(@largeurAside);
+#sociaux{
 	li
 	{
 		display:block;
-		.largeur(@largeurLi);
-	}
-
-	h2{
-		font-size:23px;
 	}
 
 	h2:before
@@ -241,25 +231,22 @@ main{
 		.afficheIcone('sociaux.png');
 	}
 
-	padding-bottom: 3px;
+	padding-bottom: 0.25em;
 }
 
 #experience
 {
-	.largeur(@largeurDroite);
 	h2:before
 	{
 		.afficheIcone('experience.png');
 		//.afficheIcone('experience.svg')		
 	}	
-	padding-bottom: 8px;
+	padding-bottom: 0.75em;
 }
 
 #formation
 {
-	.largeur(@largeurDroite);
-	.padding_bottom(5px);
-	display: inline-block;
+	.padding_bottom(0.4em);
 	h2:before
 	{
 		.afficheIcone('formation.png');
@@ -270,17 +257,14 @@ main{
 
 #interet
 {
-	.largeur(@largeurDroite);
-	.padding_bottom(5px);
+	.padding_bottom(0.4em);
 
 	h2:before
 	{
 		.afficheIcone("interet.png");
 	}
 	
-	h2{
-		font-size:23px;
-	}
+
 }
 
 h5
@@ -298,7 +282,7 @@ ul
 #experience li:before, #formation li:before, #interet li:before    
 {
     content: "-"; 
-    padding-right: 8px;
+    padding-right: 0.75em;
     color: @couleur; 
 }
 
@@ -316,6 +300,11 @@ ul
 .invisible
 {
 	visibility:hidden;
+}
+
+.cache
+{
+	display: none;
 }
 
 #encours
